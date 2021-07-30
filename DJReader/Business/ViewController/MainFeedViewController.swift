@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class MainFeedViewController: BaseViewController {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     }
     
     func setup() {
+        self.title = "阅读器"
+        
         FeedCell.registerNib(tableView)
         
         self.view.addSubview(self.tableView)
@@ -50,7 +52,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UITableViewDataSource {
+extension MainFeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -68,10 +70,13 @@ extension ViewController: UITableViewDataSource {
     
 }
 
-extension ViewController: UITableViewDelegate {
+extension MainFeedViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let mainFeed = dataSource[indexPath.row]
+        self.navigationController?.pushFeedViewController(feed: mainFeed.feed)
     }
     
 }
