@@ -7,13 +7,19 @@
 
 import UIKit
 
+struct User: Codable {
+    let name: String
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        APIClient.shared.get(source:.zhihu, handler: { (feed: Feed?) in
+            print(feed?.title)
+        })
     }
-
 
 }
 

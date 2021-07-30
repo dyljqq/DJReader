@@ -15,6 +15,12 @@
 		73073FD626B3F3C000F9AFE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73073FD426B3F3C000F9AFE9 /* LaunchScreen.storyboard */; };
 		73073FE126B3F3C000F9AFE9 /* DJReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73073FE026B3F3C000F9AFE9 /* DJReaderTests.swift */; };
 		73073FEC26B3F3C000F9AFE9 /* DJReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73073FEB26B3F3C000F9AFE9 /* DJReaderUITests.swift */; };
+		73073FFC26B3F40A00F9AFE9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73073FFB26B3F40A00F9AFE9 /* APIClient.swift */; };
+		7307400026B3F50900F9AFE9 /* FeedSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73073FFF26B3F50900F9AFE9 /* FeedSource.swift */; };
+		737642CE26B413B1002E090C /* DJParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642CD26B413B1002E090C /* DJParse.swift */; };
+		737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D026B41607002E090C /* ZhihuXMLParser.swift */; };
+		737642D326B416F6002E090C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D226B416F6002E090C /* Feed.swift */; };
+		737642D526B42675002E090C /* DJDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D426B42675002E090C /* DJDecoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		73073FE726B3F3C000F9AFE9 /* DJReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73073FEB26B3F3C000F9AFE9 /* DJReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJReaderUITests.swift; sourceTree = "<group>"; };
 		73073FED26B3F3C000F9AFE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73073FFB26B3F40A00F9AFE9 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		73073FFF26B3F50900F9AFE9 /* FeedSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSource.swift; sourceTree = "<group>"; };
+		737642CD26B413B1002E090C /* DJParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJParse.swift; sourceTree = "<group>"; };
+		737642D026B41607002E090C /* ZhihuXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuXMLParser.swift; sourceTree = "<group>"; };
+		737642D226B416F6002E090C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		737642D426B42675002E090C /* DJDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJDecoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +111,10 @@
 		73073FC826B3F3BD00F9AFE9 /* DJReader */ = {
 			isa = PBXGroup;
 			children = (
+				737642CF26B415F7002E090C /* Parses */,
+				73073FFE26B3F46400F9AFE9 /* Model */,
+				73073FFD26B3F43100F9AFE9 /* ViewController */,
+				73073FF926B3F3D400F9AFE9 /* Vendor */,
 				73073FC926B3F3BD00F9AFE9 /* AppDelegate.swift */,
 				73073FCB26B3F3BD00F9AFE9 /* SceneDelegate.swift */,
 				73073FCD26B3F3BD00F9AFE9 /* ViewController.swift */,
@@ -126,6 +142,64 @@
 				73073FED26B3F3C000F9AFE9 /* Info.plist */,
 			);
 			path = DJReaderUITests;
+			sourceTree = "<group>";
+		};
+		73073FF926B3F3D400F9AFE9 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				737642CA26B410FE002E090C /* Utils */,
+				7307400326B3FB7F00F9AFE9 /* Protocol */,
+				73073FFA26B3F3FC00F9AFE9 /* Network */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		73073FFA26B3F3FC00F9AFE9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				73073FFB26B3F40A00F9AFE9 /* APIClient.swift */,
+				73073FFF26B3F50900F9AFE9 /* FeedSource.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		73073FFD26B3F43100F9AFE9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		73073FFE26B3F46400F9AFE9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				737642D226B416F6002E090C /* Feed.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7307400326B3FB7F00F9AFE9 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				737642CD26B413B1002E090C /* DJParse.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		737642CA26B410FE002E090C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		737642CF26B415F7002E090C /* Parses */ = {
+			isa = PBXGroup;
+			children = (
+				737642D026B41607002E090C /* ZhihuXMLParser.swift */,
+				737642D426B42675002E090C /* DJDecoder.swift */,
+			);
+			path = Parses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +333,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				73073FCE26B3F3BD00F9AFE9 /* ViewController.swift in Sources */,
+				737642D526B42675002E090C /* DJDecoder.swift in Sources */,
+				737642D326B416F6002E090C /* Feed.swift in Sources */,
+				7307400026B3F50900F9AFE9 /* FeedSource.swift in Sources */,
 				73073FCA26B3F3BD00F9AFE9 /* AppDelegate.swift in Sources */,
 				73073FCC26B3F3BD00F9AFE9 /* SceneDelegate.swift in Sources */,
+				737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */,
+				73073FFC26B3F40A00F9AFE9 /* APIClient.swift in Sources */,
+				737642CE26B413B1002E090C /* DJParse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
