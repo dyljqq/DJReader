@@ -14,15 +14,16 @@ enum ParseWay {
     
 }
 
-enum FeedSource {
+enum FeedSource: String, Codable {
     case zhihu
+    case unknow
 }
 
 extension FeedSource {
     var urlString: String {
         switch self {
-        case .zhihu:
-            return "https://www.zhihu.com/rss"
+        case .zhihu: return "https://www.zhihu.com/rss"
+        default: return ""
         }
         
     }
@@ -30,7 +31,12 @@ extension FeedSource {
     var url: URL? {
         switch self {
         case .zhihu: return URL(string: self.urlString)
+        default: return nil
         }
+    }
+    
+    var imageName: String {
+        return "zhihu"
     }
     
 }

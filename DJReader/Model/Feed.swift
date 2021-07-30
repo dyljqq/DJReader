@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct MainFeed {
+    let feed: Feed
+    let source: FeedSource
+}
+
 struct Feed: Codable {
     
     let title: String
