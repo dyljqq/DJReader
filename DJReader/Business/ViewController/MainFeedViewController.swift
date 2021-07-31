@@ -41,8 +41,8 @@ class MainFeedViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-                
-        mainFeedViewModel.fetchFeeds { [weak self] feeds in
+        
+        mainFeedViewModel.updateDataSource(isUseLocaldata: true) { [weak self] feeds in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
                 strongSelf.tableView.reloadData()
@@ -60,7 +60,7 @@ extension MainFeedViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.className, for: indexPath) as! FeedCell
-        cell.render(feed: dataSource[indexPath.row])
+        cell.render(mainFeed: dataSource[indexPath.row])
         return cell
     }
     
@@ -75,8 +75,9 @@ extension MainFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let mainFeed = dataSource[indexPath.row]
-        self.navigationController?.pushFeedViewController(feed: mainFeed.feed)
+        if let feed = dataSource[indexPath.row].feed {
+            self.navigationController?.pushFeedViewController(feed: feed)
+        }
     }
     
 }

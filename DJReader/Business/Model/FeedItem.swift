@@ -87,6 +87,15 @@ extension FeedItem: SQLTable {
         insertNewFeedItems(items: items, feedId: feedId)
     }
     
+    static func getItems(by feedId: Int) -> [FeedItem] {
+        let sql = "select * from \(tableName) where feed_id = \(feedId);"
+        guard let rs = store.execute(.select, sql: sql, type: FeedItem.self) as? [[String: Any]] else {
+            return []
+        }
+        
+        return rs.compactMap { convertToModel($0) }
+    }
+    
 }
 
 let defaultFeedItem = FeedItem(title: "知乎", link: "www.zhihu.com", description: "知乎日报", pubDate: "Fri, 30 Jul 2021 14:30:07 +0800")

@@ -8,8 +8,17 @@
 import Foundation
 
 struct MainFeed {
-    let feed: Feed
+    var feed: Feed? = nil
     let source: FeedSource
+    
+    init(feed: Feed, source: FeedSource) {
+        self.feed = feed
+        self.source = source
+    }
+    
+    init(source: FeedSource) {
+        self.source = source
+    }
 }
 
 extension MainFeed: SQLTable {
@@ -42,10 +51,11 @@ extension MainFeed: SQLTable {
     static func getFeedId(by source: FeedSource) -> Int {
         let sql = "select * from \(tableName) where source=\(source.rawValue);"
         guard let rs = store.execute(.select, sql: sql, type: Self.self) as? [[String: Any]],
-              let first = rs.first else {
+              let hash = rs.first,
+              let feedId = hash["id"] as? Int32 else {
             return 0
         }
-        return first["id"] as? Int ?? 0
+        return Int(feedId)
     }
 }
 

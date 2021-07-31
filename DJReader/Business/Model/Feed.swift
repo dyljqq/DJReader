@@ -12,7 +12,7 @@ struct Feed: Codable {
     let title: String
     var description: String
     let link: String
-    let items: [FeedItem]
+    var items: [FeedItem]
     
     var id: Int? = 0
     var mainFeedId: Int? = 0

@@ -7,6 +7,8 @@
 
 import Foundation
 
+let feedSources: [FeedSource] = [.zhihu]
+
 enum ParseWay {
     
     case rss

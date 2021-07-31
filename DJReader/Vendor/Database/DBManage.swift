@@ -19,7 +19,7 @@ let store = DBManager()
 
 class DBManager {
     
-    let dbPath = "reader_test5.sqlite"
+    let dbPath = "reader_test8.sqlite"
     
     let serialQueue = DispatchQueue(label: "com.dyljqq.dbmanager")
     
@@ -64,8 +64,6 @@ class DBManager {
             print("error open database~")
             return nil
         }
-        
-        print("Successfully opened connection to database at \(dbPath)")
         return db
     }
     
@@ -99,8 +97,6 @@ class DBManager {
             return
         }
         
-        print("insert sql: ```\(sql)```")
-        
         var insertStatement: OpaquePointer?
         guard sqlite3_prepare_v2(db, sql, -1, &insertStatement, nil) == SQLITE_OK else {
             return
@@ -128,15 +124,14 @@ class DBManager {
         let code = sqlite3_step(insertStatement)
         if code != SQLITE_DONE {
             print("Could not insert row: \(code)")
+            print("sql: \(sql)")
         }
         
         sqlite3_finalize(insertStatement)
     }
     
     @discardableResult
-    func select<T: SQLTable>(_ sql: String, _ model: T.Type) -> [[String: Any]] {
-        print("select sql: \(sql)")
-        
+    func select<T: SQLTable>(_ sql: String, _ model: T.Type) -> [[String: Any]] {        
         var selectStatement: OpaquePointer?
         let status = sqlite3_prepare_v2(db, sql, -1, &selectStatement, nil)
         guard status == SQLITE_OK else {
@@ -173,8 +168,6 @@ class DBManager {
     }
     
     func delete(sql: String) {
-        print("delete sql: \(sql)")
-        
         var deleteStatement: OpaquePointer?
         guard sqlite3_prepare_v2(db, sql, -1, &deleteStatement, nil) == SQLITE_OK else {
             return
