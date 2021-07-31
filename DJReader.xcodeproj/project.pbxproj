@@ -39,6 +39,11 @@
 		73FE8E3026B4851400B174C2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE8E2E26B4851400B174C2 /* FeedDetailCell.xib */; };
 		73FE8E3226B4880300B174C2 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E3126B4880300B174C2 /* Date+Ext.swift */; };
 		73FE8E3426B4882B00B174C2 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E3326B4882B00B174C2 /* DateHelper.swift */; };
+		73FE8E3B26B51D8F00B174C2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FE8E3A26B51D8F00B174C2 /* libsqlite3.tbd */; };
+		73FE8E3E26B51DB400B174C2 /* DBManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E3D26B51DB400B174C2 /* DBManage.swift */; };
+		73FE8E8726B573ED00B174C2 /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E8626B573EC00B174C2 /* SQLTable.swift */; };
+		73FE8E8926B57A5D00B174C2 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E8826B57A5D00B174C2 /* FeedItem.swift */; };
+		73FE8E8B26B57A7D00B174C2 /* MainFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E8A26B57A7D00B174C2 /* MainFeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +101,11 @@
 		73FE8E2E26B4851400B174C2 /* FeedDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedDetailCell.xib; sourceTree = "<group>"; };
 		73FE8E3126B4880300B174C2 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		73FE8E3326B4882B00B174C2 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		73FE8E3A26B51D8F00B174C2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		73FE8E3D26B51DB400B174C2 /* DBManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManage.swift; sourceTree = "<group>"; };
+		73FE8E8626B573EC00B174C2 /* SQLTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLTable.swift; sourceTree = "<group>"; };
+		73FE8E8826B57A5D00B174C2 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		73FE8E8A26B57A7D00B174C2 /* MainFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73FE8E3B26B51D8F00B174C2 /* libsqlite3.tbd in Frameworks */,
 				73FE8E1726B46F9A00B174C2 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +142,7 @@
 				73073FDF26B3F3C000F9AFE9 /* DJReaderTests */,
 				73073FEA26B3F3C000F9AFE9 /* DJReaderUITests */,
 				73073FC726B3F3BD00F9AFE9 /* Products */,
+				73FE8E3926B51D8F00B174C2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +192,7 @@
 		73073FF926B3F3D400F9AFE9 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				73FE8E3C26B51DA100B174C2 /* Database */,
 				737642CF26B415F7002E090C /* Parses */,
 				73FE8E2326B47F8000B174C2 /* App.swift */,
 				73FE8E2026B47EB500B174C2 /* Common */,
@@ -217,6 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				737642D226B416F6002E090C /* Feed.swift */,
+				73FE8E8826B57A5D00B174C2 /* FeedItem.swift */,
+				73FE8E8A26B57A7D00B174C2 /* MainFeed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -303,6 +318,7 @@
 		73FE8E2526B4810900B174C2 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				73FE8E3526B5156F00B174C2 /* Database */,
 				73FE8E2626B4813300B174C2 /* Extension */,
 				73073FFD26B3F43100F9AFE9 /* ViewController */,
 				73FE8E0326B45B0E00B174C2 /* View */,
@@ -317,6 +333,30 @@
 				73FE8E2726B4814800B174C2 /* UINavigation+Ext.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		73FE8E3526B5156F00B174C2 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		73FE8E3926B51D8F00B174C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73FE8E3A26B51D8F00B174C2 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73FE8E3C26B51DA100B174C2 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				73FE8E3D26B51DB400B174C2 /* DBManage.swift */,
+				73FE8E8626B573EC00B174C2 /* SQLTable.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -460,7 +500,9 @@
 				73FE8E2226B47ECA00B174C2 /* MainCoordinator.swift in Sources */,
 				73FE8E1E26B47E7800B174C2 /* Coordinator.swift in Sources */,
 				73FE8E2A26B4818400B174C2 /* FeedViewController.swift in Sources */,
+				73FE8E3E26B51DB400B174C2 /* DBManage.swift in Sources */,
 				73073FCE26B3F3BD00F9AFE9 /* MainFeedViewController.swift in Sources */,
+				73FE8E8926B57A5D00B174C2 /* FeedItem.swift in Sources */,
 				73FE8E3226B4880300B174C2 /* Date+Ext.swift in Sources */,
 				73FE8E1A26B4766E00B174C2 /* mainFeedViewModel.swift in Sources */,
 				73FE8E2C26B4839000B174C2 /* BaseViewController.swift in Sources */,
@@ -473,6 +515,7 @@
 				73FE8E2426B47F8000B174C2 /* App.swift in Sources */,
 				7307400026B3F50900F9AFE9 /* FeedSource.swift in Sources */,
 				73FE8E1C26B47C1800B174C2 /* Enviroment.swift in Sources */,
+				73FE8E8B26B57A7D00B174C2 /* MainFeed.swift in Sources */,
 				73073FCA26B3F3BD00F9AFE9 /* AppDelegate.swift in Sources */,
 				73073FCC26B3F3BD00F9AFE9 /* SceneDelegate.swift in Sources */,
 				73FE8E2F26B4851400B174C2 /* FeedDetailCell.swift in Sources */,
@@ -481,6 +524,7 @@
 				73073FFC26B3F40A00F9AFE9 /* APIClient.swift in Sources */,
 				73FE8E2826B4814800B174C2 /* UINavigation+Ext.swift in Sources */,
 				737642CE26B413B1002E090C /* DJParse.swift in Sources */,
+				73FE8E8726B573ED00B174C2 /* SQLTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

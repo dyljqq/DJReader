@@ -14,9 +14,9 @@ enum ParseWay {
     
 }
 
-enum FeedSource: String, Codable {
+enum FeedSource: Int, Codable {
+    case unknow = 0
     case zhihu
-    case unknow
 }
 
 extension FeedSource {

@@ -1,25 +1,25 @@
 //
-//  Feed.swift
+//  FeedItem.swift
 //  DJReader
 //
-//  Created by 季勤强 on 2021/7/30.
+//  Created by 季勤强 on 2021/7/31.
 //
 
 import Foundation
 
-struct Feed: Codable {
+struct FeedItem: Codable {
     
     let title: String
-    let description: String
     let link: String
-    let items: [FeedItem]
+    let description: String
+    let pubDate: String
     
 }
 
-extension Feed: SQLTable {
+extension FeedItem: SQLTable {
     
     var tableName: String {
-        return "feed"
+        return "feed_item"
     }
     
     var tableSql: String {
@@ -27,10 +27,11 @@ extension Feed: SQLTable {
             "title TEXT not null default \"\"",
             "desc TEXT not null default \"\"",
             "link TEXT not null default \"\"",
+            "feed_id INTEGER not null default 0",
         ]
         return createTableSql(fields)
     }
     
 }
 
-let defaultFeed = Feed(title: "知乎", description: "知乎日报", link: "www.zhihu.com", items: [defaultFeedItem])
+let defaultFeedItem = FeedItem(title: "知乎", link: "www.zhihu.com", description: "知乎日报", pubDate: "Fri, 30 Jul 2021 14:30:07 +0800")
