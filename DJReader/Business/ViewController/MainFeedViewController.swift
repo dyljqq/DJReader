@@ -41,13 +41,7 @@ class MainFeedViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        let mirror = Mirror(reflecting: defaultFeed)
-        
-        for child in mirror.children {
-            print(child.label, child.value, type(of: child.value))
-        }
-        
+                
         mainFeedViewModel.fetchFeeds { [weak self] feeds in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {

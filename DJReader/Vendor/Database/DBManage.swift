@@ -8,35 +8,20 @@
 import Foundation
 import SQLite3
 
-class Person
-{
-    
-    var name: String = ""
-    var age: Int = 0
-    var id: Int = 0
-    
-    init(id:Int, name:String, age:Int)
-    {
-        self.id = id
-        self.name = name
-        self.age = age
-    }
-    
-}
-
 enum SqlOperation {
-    case insert(String)
-    case select(String)
-    case update(String)
-    case delete(String)
-    case createTable(String)
+    case insert
+    case select
+    case update
+    case delete
 }
 
 let store = DBManager()
 
 class DBManager {
     
-    let dbPath = "reader_test.sqlite"
+    let dbPath = "reader_test5.sqlite"
+    
+    let serialQueue = DispatchQueue(label: "com.dyljqq.dbmanager")
     
     var db: OpaquePointer?
     
@@ -44,17 +29,28 @@ class DBManager {
         
     }
     
-    func execute(_ operation: SqlOperation) {
-        self.db = openDatabase()
-        
-        switch operation {
-        case .insert(let sql): insert(sql)
-        case .select(let sql): read(sql)
-        case .createTable(let sql): createTable(sql)
-        default: break
+    @discardableResult
+    func execute<T: SQLTable>(_ operation: SqlOperation, sql: String, model: T? = nil, type: T.Type? = nil) -> Any? {
+        self.serialQueue.sync {
+            self.db = openDatabase()
+            switch operation {
+            case .insert:
+                if let model = model {
+                    self.insert(sql, model)
+                }
+            case .select:
+                if let type = type {
+                    return self.select(sql, type)
+                }
+            case .delete:
+                self.delete(sql: sql)
+            default: break
+            }
+            
+            self.closeDatabase(db)
+            
+            return nil
         }
-        
-        self.closeDatabase(db)
     }
     
     func openDatabase() -> OpaquePointer? {
@@ -78,7 +74,11 @@ class DBManager {
     }
     
     func createTable(_ sql: String) {
-        var createTableStatement: OpaquePointer? = nil
+        print("table sql: ```\(sql)```")
+        
+        self.db = openDatabase()
+        
+        var createTableStatement: OpaquePointer?
         if sqlite3_prepare_v2(db, sql, -1, &createTableStatement, nil) == SQLITE_OK {
             if sqlite3_step(createTableStatement) == SQLITE_DONE {
                 print("table created.")
@@ -89,14 +89,103 @@ class DBManager {
             print("CREATE TABLE statement could not be prepared.")
         }
         sqlite3_finalize(createTableStatement)
+        
+        self.closeDatabase(db)
     }
     
-    func insert(_ sql: String) {
+    func insert<T: SQLTable>(_ sql: String, _ model: T) {
+        guard !sql.isEmpty else {
+            print("sql cannot be empty....")
+            return
+        }
         
+        print("insert sql: ```\(sql)```")
+        
+        var insertStatement: OpaquePointer?
+        guard sqlite3_prepare_v2(db, sql, -1, &insertStatement, nil) == SQLITE_OK else {
+            return
+        }
+
+        for (index, field) in T.fields.enumerated() {
+            
+            if let fieldType = T.fieldsTypeMapping[field] {
+                let offset = Int32(index) + 1
+                
+                switch fieldType {
+                case .int:
+                    if let value = model.fieldsValueMapping[field] as? Int {
+                        sqlite3_bind_int(insertStatement, offset, Int32(value))
+                    }
+                case .text:
+                    let text: String = model.fieldsValueMapping[field] as? String ?? ""
+                    sqlite3_bind_text(insertStatement, offset, (text as NSString).utf8String, -1, nil)
+                default:
+                    break
+                }
+            }
+        }
+        
+        let code = sqlite3_step(insertStatement)
+        if code != SQLITE_DONE {
+            print("Could not insert row: \(code)")
+        }
+        
+        sqlite3_finalize(insertStatement)
     }
     
-    func read(_ sql: String) {
+    @discardableResult
+    func select<T: SQLTable>(_ sql: String, _ model: T.Type) -> [[String: Any]] {
+        print("select sql: \(sql)")
         
+        var selectStatement: OpaquePointer?
+        let status = sqlite3_prepare_v2(db, sql, -1, &selectStatement, nil)
+        guard status == SQLITE_OK else {
+            print("select error: status: \(status)")
+            return []
+        }
+        
+        var rs: [[String: Any]] = []
+        while sqlite3_step(selectStatement) == SQLITE_ROW {
+            var hash: [String: Any] = [:]
+            let id = sqlite3_column_int(selectStatement, 0)
+            
+            hash["id"] = id
+            for (index, field) in T.fields.enumerated() {
+                let offset = Int32(index) + 1
+                if let typ = T.fieldsTypeMapping[field] {
+                    switch typ {
+                    case .int:
+                        hash[field] = sqlite3_column_int(selectStatement, offset)
+                    case .text:
+                        if let v = sqlite3_column_text(selectStatement, offset) {
+                            hash[field] = String(cString: v)
+                        }
+                    default: break
+                    }
+                }
+            }
+            rs.append(hash)
+        }
+        
+        sqlite3_finalize(selectStatement)
+        
+        return rs
+    }
+    
+    func delete(sql: String) {
+        print("delete sql: \(sql)")
+        
+        var deleteStatement: OpaquePointer?
+        guard sqlite3_prepare_v2(db, sql, -1, &deleteStatement, nil) == SQLITE_OK else {
+            return
+        }
+        
+        let status = sqlite3_step(deleteStatement)
+        if status != SQLITE_DONE {
+            print("delete error: \(status)")
+        }
+        
+        sqlite3_finalize(deleteStatement)
     }
 }
 

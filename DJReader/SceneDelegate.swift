@@ -27,10 +27,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func setup() {
         // 初始化数据库的表
-        [defaultMainFeed, defaultFeed, defaultFeedItem].forEach { (model: SQLTable) in
-            store.execute(.createTable(model.tableSql))
-        }
-        
+        MainFeed.createTable()
+        Feed.createTable()
+        FeedItem.createTable()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -17,7 +17,7 @@ class MainFeedViewModel {
     let queue = DispatchQueue(label: mainFeedQueueName, attributes: [.concurrent])
     
     init() {
-        (0..<10).forEach { _ in
+        (0..<1).forEach { _ in
             feedSources.append(.zhihu)
         }
     }
@@ -39,6 +39,21 @@ class MainFeedViewModel {
         }
         
         group.notify(queue: queue) {
+            for mainFeed in self.dataSource {
+                let mainFeedId = MainFeed.getFeedId(by: mainFeed.source)
+                var feed = Feed.getByMainFeedId(mainFeedId)
+                if feed == nil {
+                    var f = mainFeed.feed
+                    f.mainFeedId = mainFeedId
+                    f.execute(.insert, sql: Feed.insertSql)
+                    feed = Feed.getByMainFeedId(mainFeedId)
+                }
+                
+                if let feedId = feed?.id {
+                    FeedItem.insertFeedItems(feedId, items: mainFeed.feed.items)
+                }
+            }
+            
             completionHandler(self.dataSource)
         }
         

@@ -7,84 +7,110 @@
 
 import Foundation
 
+enum FieldType {
+    case int
+    case text
+    case unknown
+    
+    var name: String? {
+        switch self {
+        case .int: return "INTEGER"
+        case .text: return "TEXT"
+        case .unknown: return nil
+        }
+    }
+    
+}
+
 protocol SQLTable {
     
-    var tableName: String { get }
-    var tableSql: String { get }
-    var needId: Bool { get }
-    var insertKeys: [String] { get }
+    static var tableName: String { get }
+    static var fields: [String] { get }
+    static var uniqueKeys: [String] { get }
+    static var fieldsTypeMapping: [String: FieldType] { get }
+    
+    var fieldsValueMapping: [String: Any] { get }
+    
+    func execute()
+    
+    static func convertToModel(_ hash: [String: Any]) -> Self?
     
 }
 
 extension SQLTable {
     
-    var needId: Bool {
-        return true
+    func execute() {
+        // TODO
     }
     
-    var tableSql: String {
-        return createTableSql(needID: needId)
+    static func convertToModel(_ hash: [String: Any]) -> Self? {
+        return nil
     }
     
-    var fields: [String] {
-        return self.childs.compactMap { $0.label }
-    }
-    
-    var insertSql: String {
-        var sql = "insert to (id"
-        
-        let fields = self.childs.compactMap { $0.label }
-        sql = sql + fields.joined(separator: ",") + ""
-        
-        return "insert into \(self.tableName) (id,\(fields.joined(separator: ","))) values(?,\(fields.compactMap { _ in "?" }.joined(separator: ",")));"
-    }
-    
-    var insertKeys: [String] {
+    static var uniqueKeys: [String] {
         return []
     }
     
-    var childs: Mirror.Children {
-        let mirror = Mirror(reflecting: self)
-        return mirror.children
-    }
-    
-    var selectAllSql: String {
-        return "select * from \(tableName)"
-    }
-    
-    func createTableSql(needID: Bool) -> String {
-        var fieldsSql: [String] = needID ? ["id INTEGER PRIMARY KEY not null AUTOINCREMENT"] : []
+    static var tableSql: String {
+        var rs = ["id INTEGER PRIMARY KEY AUTOINCREMENT not null"]
         
-        for child in childs {
-            guard let name = child.label else { continue }
-            let typ = getFieldType(child.value)
-            fieldsSql.append("\(name) \(typ) not null default \"\"")
+        for field in Self.fields {
+            guard let typ = Self.fieldsTypeMapping[field], let name = typ.name else {
+                continue
+            }
+            rs.append("\(field) \(name)")
         }
         
-        return "CREATE TABLE IF NOT EXISTS \(tableName)(\(fieldsSql.joined(separator: ",")));"
-    }
-    
-    func selectSql(id: Int) -> String {
-        return "select (\(fields.joined(separator: ","))) from \(tableName) where id=\(id)"
-    }
-    
-    func createTableSql(_ fields: [String]) -> String {
-        var fields = fields
-        if needId {
-            fields.insert("id INTEGER PRIMARY KEY AUTOINCREMENT not null", at: 0)
+        for uk in uniqueKeys {
+            rs.append("UNIQUE(\(uk))")
         }
         
-        return "CREATE TABLE IF NOT EXISTS \(tableName)(\(fields.joined(separator: ",")));"
+        return "CREATE TABLE IF NOT EXISTS \(Self.tableName)(\(rs.joined(separator: ",")))"
     }
     
-    private func getFieldType(_ value: Any) -> String {
-        if let _ = value as? Int {
-            return "INTEGER"
-        } else if let _ = value as? String {
-            return "TEXT"
+    var fieldsValueMapping: [String: Any] {
+        return [:]
+    }
+    
+    static var insertSql: String {
+        return "insert into \(tableName)(\(fields.joined(separator: ","))) values(\(fields.compactMap { _ in  "?" }.joined(separator: ",")));"
+    }
+    
+    static func createTable() {
+        store.createTable(tableSql)
+    }
+    
+    @discardableResult
+    func execute(_ operation: SqlOperation, sql: String) -> Any? {
+        switch operation {
+        case .insert: return store.execute(operation, sql: sql, model: self)
+        case .select: return store.execute(operation, sql: sql, model: self, type: Self.self)
+        default: break
         }
-        
-        return "TEXT"
+        return nil
+    }
+    
+    func insert() {
+        execute(.insert, sql: Self.insertSql)
+    }
+    
+    func select() -> [[String: Any]] {
+        let sql = "select * from \(Self.tableName)"
+        guard let rs = execute(.select, sql: sql) as? [[String: Any]] else {
+            return []
+        }
+        return rs
+    }
+    
+    static func selectAll() -> [[String: Any]] {
+        let sql = "select * from \(Self.tableName)"
+        let rs = store.execute(.select, sql: sql, type: Self.self) as? [[String: Any]] ?? []
+        return rs
+    }
+    
+    static func deleteTable() {
+        let sql = "drop table \(tableName)"
+        store.execute(.delete, sql: sql, type: Self.self)
     }
     
 }
