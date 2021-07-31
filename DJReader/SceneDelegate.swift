@@ -21,6 +21,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navi
         
         window?.makeKeyAndVisible()
+        
+        setup()
+    }
+    
+    func setup() {
+        setupDB()
+    }
+    
+    func setupDB() {
+        // 初始化数据库的表
+        MainFeed.createTable()
+        Feed.createTable()
+        FeedItem.createTable()
+        
+        for source in feedSources {
+            let mainFeedId = MainFeed.getFeedId(by: source)
+            if mainFeedId == 0 {
+                MainFeed(source: source).insert()
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -17,10 +17,14 @@ class FeedCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func render(feed: MainFeed) {
-        self.feedImageView.image = UIImage(named: feed.source.imageName)
-        self.titleLabel.text = feed.feed.title
-        self.descLabel.text = feed.feed.description
+    func render(mainFeed: MainFeed) {
+        guard let feed = mainFeed.feed else {
+            return
+        }
+        
+        self.feedImageView.image = UIImage(named: mainFeed.source.imageName)
+        self.titleLabel.text = feed.title
+        self.descLabel.text = feed.description
     }
     
 }
