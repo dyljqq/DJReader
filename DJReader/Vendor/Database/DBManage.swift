@@ -131,7 +131,7 @@ class DBManager {
     }
     
     @discardableResult
-    func select<T: SQLTable>(_ sql: String, _ model: T.Type) -> [[String: Any]] {        
+    func select<T: SQLTable>(_ sql: String, _ model: T.Type) -> [[String: Any]] {
         var selectStatement: OpaquePointer?
         let status = sqlite3_prepare_v2(db, sql, -1, &selectStatement, nil)
         guard status == SQLITE_OK else {

@@ -16,9 +16,16 @@ enum ParseWay {
     
 }
 
-enum FeedSource: Int, Codable {
+enum FeedSource: Int, Decodable {
     case unknow = 0
     case zhihu
+    
+    var parser: DJParse? {
+        switch self {
+        case .zhihu: return ZhihuXMLParser()
+        case .unknow: return nil
+        }
+    }
 }
 
 extension FeedSource {

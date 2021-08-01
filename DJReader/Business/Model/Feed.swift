@@ -7,15 +7,40 @@
 
 import Foundation
 
-struct Feed: Codable {
+struct Feed: Decodable {
     
     let title: String
     var description: String
     let link: String
     var items: [FeedItem]
     
-    var id: Int? = 0
-    var mainFeedId: Int? = 0
+    var id: Int = 0
+    var mainFeedId: Int = 0
+    
+    init(title: String, description: String, link: String, items: [FeedItem]) {
+        self.title = title
+        self.description = description
+        self.link = link
+        self.items = items
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case title, description, desc, id, link, items, mainFeedId
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decode(String.self, forKey: .title)
+        if let desc = try? container.decode(String.self, forKey: .description) {
+            self.description = desc
+        } else {
+            self.description = (try? container.decode(String.self, forKey: .desc)) ?? ""
+        }
+        self.link = try container.decode(String.self, forKey: .link)
+        self.id = (try? container.decode(Int.self, forKey: .id)) ?? 0
+        self.mainFeedId = (try? container.decode(Int.self, forKey: .mainFeedId)) ?? 0
+        self.items = (try? container.decode([FeedItem].self, forKey: .items)) ?? []
+    }
     
 }
 
@@ -48,7 +73,7 @@ extension Feed: SQLTable {
             "title": self.title,
             "desc": self.description,
             "link": self.link,
-            "main_feed_id": self.mainFeedId ?? 0
+            "main_feed_id": self.mainFeedId
         ]
     }
     
@@ -56,26 +81,14 @@ extension Feed: SQLTable {
         return ["main_feed_id"]
     }
     
-    static func convertToModel(_ hash: [String : Any]) -> Feed? {
-        let title = hash["title"] as? String ?? ""
-        let link = hash["link"] as? String ?? ""
-        let desc = hash["desc"] as? String ?? ""
-        let mainFeedId = hash["main_feed_id"] as? Int ?? 0
-        let id = hash["id"] as? Int ?? 0
-        
-        var feed = Feed(title: title, description: desc, link: link, items: [])
-        feed.id = id
-        feed.mainFeedId = mainFeedId
-        return feed
-    }
-    
     static func getByMainFeedId(_ feedId: Int) -> Feed? {
         let sql = "select * from \(tableName) where main_feed_id=\(feedId);"
         let rs = store.execute(.select, sql: sql, type: Feed.self)
+        
         guard let first = (rs as? [[String: Any]])?.first else {
             return nil
         }
-        return convertToModel(first)
+        return decode(first)
     }
     
 }
