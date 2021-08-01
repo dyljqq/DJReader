@@ -16,16 +16,22 @@ class APIClient {
     
     var host: String = ""
     
+    let queue = DispatchQueue(label: "com.dyljqq.network", attributes: [.concurrent])
+    
     static let shared = APIClient()
     
     func get<T: Decodable>(source: FeedSource, handler: @escaping (T?) -> Void) {
-        self.get(urlString: source.urlString) { dict in
-            let value = DJDecoder<T>(dict: dict).decode()
-            handler(value)
+        self.get(urlString: source.urlString) { data in
+            source.parser?.parse(data: data) { dict in
+                let value = DJDecoder<T>(dict: dict).decode()
+                DispatchQueue.main.async {
+                    handler(value)
+                }
+             }
         }
     }
     
-    func get(urlString: String, queryItems: [String: String]? = nil, handler: @escaping ([String: Any]) -> Void) {
+    func get(urlString: String, queryItems: [String: String]? = nil, handler: @escaping (Data) -> Void) {
         
         guard let url = URL(string: urlString) else {
             return
@@ -52,9 +58,7 @@ class APIClient {
                 return
             }
             
-            ZhihuXMLParser().parse(data: data) { dict in
-               handler(dict)
-            }
+            handler(data)
         }
         task.resume()
     }
