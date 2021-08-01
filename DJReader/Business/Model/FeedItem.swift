@@ -7,14 +7,38 @@
 
 import Foundation
 
-struct FeedItem: Codable {
+struct FeedItem: Decodable {
     
     let title: String
     let link: String
     let description: String
     let pubDate: String
     
-    var feedId: Int? = 0
+    var feedId: Int = 0
+    
+    init(title: String, link: String, description: String, pubDate: String) {
+        self.title = title
+        self.description = description
+        self.link = link
+        self.pubDate = pubDate
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case title, link, description, pubDate, desc, feedId
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decode(String.self, forKey: .title)
+        link = try container.decode(String.self, forKey: .link)
+        if let description = try? container.decode(String.self, forKey: .description) {
+            self.description = description
+        } else {
+            self.description = (try? container.decode(String.self, forKey: .desc)) ?? ""
+        }
+        pubDate = try container.decode(String.self, forKey: .pubDate)
+        feedId = (try? container.decode(Int.self, forKey: .feedId)) ?? 0
+    }
     
 }
 
@@ -45,20 +69,8 @@ extension FeedItem: SQLTable {
             "link": self.link,
             "desc": self.description,
             "pub_date": self.pubDate,
-            "feed_id": self.feedId ?? 0
+            "feed_id": self.feedId
         ]
-    }
-    
-    static func convertToModel(_ hash: [String : Any]) -> FeedItem? {
-        let title = hash["title"] as? String ?? ""
-        let link = hash["link"] as? String ?? ""
-        let desc = hash["desc"] as? String ?? ""
-        let pubDate = hash["pub_date"] as? String ?? ""
-        let feedId = hash["feed_id"] as? Int ?? 0
-        
-        var item = FeedItem(title: title, link: link, description: desc, pubDate: pubDate)
-        item.feedId = feedId
-        return item
     }
     
     static var tableName: String {
@@ -93,7 +105,7 @@ extension FeedItem: SQLTable {
             return []
         }
         
-        return rs.compactMap { convertToModel($0) }
+        return rs.compactMap { decode($0) }
     }
     
 }

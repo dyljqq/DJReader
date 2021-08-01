@@ -36,8 +36,8 @@ class MainFeedViewModel {
         for source in feedSources {
             let mainFeedId = MainFeed.getFeedId(by: source)
             
-            if var feed = Feed.getByMainFeedId(mainFeedId), let feedId = feed.id {
-                feed.items = FeedItem.getItems(by: feedId)
+            if var feed = Feed.getByMainFeedId(mainFeedId){
+                feed.items = FeedItem.getItems(by: feed.id)
                 feeds.append(MainFeed(feed: feed, source: source))
             }
         }

@@ -16,7 +16,7 @@ enum ParseWay {
     
 }
 
-enum FeedSource: Int, Codable {
+enum FeedSource: Int, Decodable {
     case unknow = 0
     case zhihu
 }

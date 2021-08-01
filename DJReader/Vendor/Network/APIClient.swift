@@ -18,7 +18,7 @@ class APIClient {
     
     static let shared = APIClient()
     
-    func get<T: Codable>(source: FeedSource, handler: @escaping (T?) -> Void) {
+    func get<T: Decodable>(source: FeedSource, handler: @escaping (T?) -> Void) {
         self.get(urlString: source.urlString) { dict in
             let value = DJDecoder<T>(dict: dict).decode()
             handler(value)

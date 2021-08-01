@@ -32,8 +32,8 @@ protocol SQLTable {
     var fieldsValueMapping: [String: Any] { get }
     
     func execute()
-    
-    static func convertToModel(_ hash: [String: Any]) -> Self?
+        
+    static func decode<T: Decodable>(_ hash: [String: Any]) -> T?
     
 }
 
@@ -43,8 +43,8 @@ extension SQLTable {
         // TODO
     }
     
-    static func convertToModel(_ hash: [String: Any]) -> Self? {
-        return nil
+    static func decode<T: Decodable>(_ hash: [String: Any]) -> T? {
+        return DJDecoder<T>(dict: hash).decode()
     }
     
     static var uniqueKeys: [String] {
