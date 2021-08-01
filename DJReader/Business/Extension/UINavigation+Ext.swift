@@ -14,4 +14,9 @@ extension UINavigationController {
         self.pushViewController(vc, animated: true)
     }
     
+    func pushArticleWebviewController(feedItem: FeedItem) {
+        let vc = ArticleWebViewController(feedItem: feedItem)
+        self.pushViewController(vc, animated: true)
+    }
+    
 }
