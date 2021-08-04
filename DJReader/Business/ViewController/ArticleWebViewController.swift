@@ -13,7 +13,30 @@ import SafariServices
 class ArticleWebViewController: BaseViewController {
     
     let feedItem: FeedItem
-    let webView: WKWebView = WKWebView()
+    lazy var webView: WKWebView = {
+       let webView = WKWebView(frame: screenBounds, configuration: webConfig)
+        return webView
+    }()
+    
+    // nice job!!!!
+    let photoJS = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta); var imgs = document.getElementsByTagName('img');for (var i in imgs){imgs[i].style.maxWidth='100%';imgs[i].style.height='auto';}"
+    
+    lazy var userScript: WKUserScript = {
+        let us = WKUserScript(source: photoJS, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        return us
+    }()
+    
+    lazy var userContentController: WKUserContentController = {
+       let userContentController = WKUserContentController()
+        userContentController.addUserScript(userScript)
+        return userContentController
+    }()
+    
+    lazy var webConfig: WKWebViewConfiguration = {
+      let config = WKWebViewConfiguration()
+        config.userContentController = userContentController
+        return config
+    }()
     
     init(feedItem: FeedItem) {
         self.feedItem = feedItem

@@ -7,7 +7,7 @@
 
 import Foundation
 
-let feedSources: [FeedSource] = [.zhihu]
+let feedSources: [FeedSource] = [.zhihu, .cnBeta]
 
 enum ParseWay {
     
@@ -19,10 +19,12 @@ enum ParseWay {
 enum FeedSource: Int, Decodable {
     case unknow = 0
     case zhihu
+    case cnBeta
     
     var parser: DJParse? {
         switch self {
         case .zhihu: return ZhihuXMLParser()
+        case .cnBeta: return CnBetaXMLParser()
         case .unknow: return nil
         }
     }
@@ -32,16 +34,14 @@ extension FeedSource {
     var urlString: String {
         switch self {
         case .zhihu: return "https://www.zhihu.com/rss"
+        case .cnBeta: return "https://www.cnbeta.com/backend.php"
         default: return ""
         }
         
     }
     
     var url: URL? {
-        switch self {
-        case .zhihu: return URL(string: self.urlString)
-        default: return nil
-        }
+        return URL(string: self.urlString)
     }
     
     var imageName: String {

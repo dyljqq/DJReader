@@ -48,6 +48,8 @@ class MainFeedViewController: BaseViewController {
                 strongSelf.tableView.reloadData()
             }
         }
+        
+        
     }
 
 }

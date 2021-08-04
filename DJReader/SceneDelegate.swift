@@ -15,11 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        
         let mainFeedViewController = MainFeedViewController()
         let navi = UINavigationController(rootViewController: mainFeedViewController)
         window?.rootViewController = navi
-        
         window?.makeKeyAndVisible()
         
         setup()
@@ -39,6 +37,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let mainFeedId = MainFeed.getFeedId(by: source)
             if mainFeedId == 0 {
                 MainFeed(source: source).insert()
+            } else {
+                
             }
         }
     }

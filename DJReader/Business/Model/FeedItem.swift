@@ -15,6 +15,7 @@ struct FeedItem: Decodable {
     let pubDate: String
     
     var feedId: Int = 0
+    var author: String = ""
     
     init(title: String, link: String, description: String, pubDate: String) {
         self.title = title
@@ -24,7 +25,7 @@ struct FeedItem: Decodable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case title, link, description, pubDate, desc, feedId
+        case title, link, description, pubDate, desc, feedId, author
     }
     
     init(from decoder: Decoder) throws {
@@ -38,6 +39,7 @@ struct FeedItem: Decodable {
         }
         pubDate = try container.decode(String.self, forKey: .pubDate)
         feedId = (try? container.decode(Int.self, forKey: .feedId)) ?? 0
+        author = (try? container.decode(String.self, forKey: .author)) ?? ""
     }
     
 }
@@ -49,7 +51,8 @@ extension FeedItem: SQLTable {
             "link",
             "desc",
             "pub_date",
-            "feed_id"
+            "feed_id",
+            "author"
         ]
     }
     
@@ -59,7 +62,8 @@ extension FeedItem: SQLTable {
             "link": .text,
             "desc": .text,
             "pub_date": .text,
-            "feed_id": .int
+            "feed_id": .int,
+            "author": .text
         ]
     }
     
@@ -69,7 +73,8 @@ extension FeedItem: SQLTable {
             "link": self.link,
             "desc": self.description,
             "pub_date": self.pubDate,
-            "feed_id": self.feedId
+            "feed_id": self.feedId,
+            "author": self.author
         ]
     }
     

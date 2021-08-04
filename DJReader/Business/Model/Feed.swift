@@ -81,14 +81,23 @@ extension Feed: SQLTable {
         return ["main_feed_id"]
     }
     
-    static func getByMainFeedId(_ feedId: Int) -> Feed? {
-        let sql = "select * from \(tableName) where main_feed_id=\(feedId);"
-        let rs = store.execute(.select, sql: sql, type: Feed.self)
-        
-        guard let first = (rs as? [[String: Any]])?.first else {
+    static func getFeed(by mainFeedId: Int) -> Self? {
+        let sql = "select * from \(tableName) where main_feed_id=\(mainFeedId);"
+        guard let rs = store.execute(.select, sql: sql, type: Feed.self) as? [[String: Any]], !rs.isEmpty else {
             return nil
         }
-        return decode(first)
+        
+        return decode(rs[0])
+    }
+    
+    func update(_ mainFeedId: Int) {
+        let feed = Feed.getFeed(by: mainFeedId)
+        guard let feed = feed else {
+            return
+        }
+        
+        let sql = "update \(Self.tableName) set title=\"\(self.title)\", link=\"\(self.link)\", desc=\"\(self.description)\" where id=\(feed.id)"
+        store.execute(.update, sql: sql, type: Self.self)
     }
     
 }
