@@ -37,6 +37,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let mainFeedId = MainFeed.getFeedId(by: source)
             if mainFeedId == 0 {
                 MainFeed(source: source).insert()
+            } else {
+                
             }
         }
     }

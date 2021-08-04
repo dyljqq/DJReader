@@ -36,7 +36,7 @@ class MainFeedViewModel {
         for source in feedSources {
             let mainFeedId = MainFeed.getFeedId(by: source)
             
-            if var feed = Feed.getByMainFeedId(mainFeedId){
+            if var feed = Feed.getFeed(by: mainFeedId){
                 feed.items = FeedItem.getItems(by: feed.id)
                 feeds.append(MainFeed(feed: feed, source: source))
             }
@@ -65,13 +65,17 @@ class MainFeedViewModel {
         group.notify(queue: queue) {
             for mainFeed in mainFeeds {
                 let mainFeedId = MainFeed.getFeedId(by: mainFeed.source)
-                var feed = Feed.getByMainFeedId(mainFeedId)
+                var feed = Feed.getFeed(by: mainFeedId)
                 
                 if feed == nil {
                     var f = mainFeed.feed
                     f?.mainFeedId = mainFeedId
                     f?.execute(.insert, sql: Feed.insertSql)
-                    feed = Feed.getByMainFeedId(mainFeedId)
+                    feed = Feed.getFeed(by: mainFeedId)
+                }
+                
+                if let f = mainFeed.feed {
+                    f.update(mainFeedId)
                 }
                 
                 if let feedId = feed?.id, let feed = mainFeed.feed {

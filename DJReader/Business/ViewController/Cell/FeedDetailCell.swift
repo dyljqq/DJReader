@@ -19,11 +19,14 @@ class FeedDetailCell: UITableViewCell {
     func render(feedItem: FeedItem) {
         self.titleLabel.text = feedItem.title
         
+        var desc = ""
         if let date = DateHelper.standard.dateFromRFC822String(feedItem.pubDate) {
-            self.descLabel.text = DateHelper.standard.dateToString(date)
+            desc = DateHelper.standard.dateToString(date)
         } else {
-            self.descLabel.text = feedItem.pubDate
+            desc = feedItem.pubDate
         }
+        
+        self.descLabel.text = "\(desc)  \(feedItem.author)"
     }
     
 }

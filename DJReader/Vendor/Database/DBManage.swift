@@ -19,7 +19,7 @@ let store = DBManager()
 
 class DBManager {
     
-    let dbPath = "reader_test8.sqlite"
+    let dbPath = "reader_test9.sqlite"
     
     let serialQueue = DispatchQueue(label: "com.dyljqq.dbmanager")
     
@@ -44,7 +44,8 @@ class DBManager {
                 }
             case .delete:
                 self.delete(sql: sql)
-            default: break
+            case .update:
+                self.update(sql)
             }
             
             self.closeDatabase(db)
@@ -165,6 +166,20 @@ class DBManager {
         sqlite3_finalize(selectStatement)
         
         return rs
+    }
+    
+    func update(_ sql: String) {
+        var updateStatement: OpaquePointer?
+        guard sqlite3_prepare_v2(db, sql, -1, &updateStatement, nil) == SQLITE_OK else {
+            return
+        }
+        
+        let status = sqlite3_step(updateStatement)
+        guard status == SQLITE_DONE else {
+            print("update error...")
+            return
+        }
+        sqlite3_finalize(updateStatement)
     }
     
     func delete(sql: String) {

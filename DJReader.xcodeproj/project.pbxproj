@@ -22,13 +22,14 @@
 		737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D026B41607002E090C /* ZhihuXMLParser.swift */; };
 		737642D326B416F6002E090C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D226B416F6002E090C /* Feed.swift */; };
 		737642D526B42675002E090C /* DJDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D426B42675002E090C /* DJDecoder.swift */; };
+		73D0037026BA7AE200F841E7 /* CnBetaXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0036F26BA7AE200F841E7 /* CnBetaXMLParser.swift */; };
 		73FE8E0A26B45B8D00B174C2 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E0826B45B8D00B174C2 /* FeedCell.swift */; };
 		73FE8E0B26B45B8D00B174C2 /* FeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE8E0926B45B8D00B174C2 /* FeedCell.xib */; };
 		73FE8E0F26B467C700B174C2 /* DJColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E0E26B467C700B174C2 /* DJColor.swift */; };
 		73FE8E1226B46AC500B174C2 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E1126B46AC500B174C2 /* UIView+Ext.swift */; };
 		73FE8E1426B46BBC00B174C2 /* UITableViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E1326B46BBC00B174C2 /* UITableViewCell+Ext.swift */; };
 		73FE8E1726B46F9A00B174C2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 73FE8E1626B46F9A00B174C2 /* SnapKit */; };
-		73FE8E1A26B4766E00B174C2 /* mainFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E1926B4766E00B174C2 /* mainFeedViewModel.swift */; };
+		73FE8E1A26B4766E00B174C2 /* MainFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E1926B4766E00B174C2 /* MainFeedViewModel.swift */; };
 		73FE8E1C26B47C1800B174C2 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E1B26B47C1800B174C2 /* Enviroment.swift */; };
 		73FE8E1E26B47E7800B174C2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E1D26B47E7800B174C2 /* Coordinator.swift */; };
 		73FE8E2226B47ECA00B174C2 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FE8E2126B47ECA00B174C2 /* MainCoordinator.swift */; };
@@ -91,12 +92,13 @@
 		737642D026B41607002E090C /* ZhihuXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuXMLParser.swift; sourceTree = "<group>"; };
 		737642D226B416F6002E090C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		737642D426B42675002E090C /* DJDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJDecoder.swift; sourceTree = "<group>"; };
+		73D0036F26BA7AE200F841E7 /* CnBetaXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CnBetaXMLParser.swift; sourceTree = "<group>"; };
 		73FE8E0826B45B8D00B174C2 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		73FE8E0926B45B8D00B174C2 /* FeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCell.xib; sourceTree = "<group>"; };
 		73FE8E0E26B467C700B174C2 /* DJColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJColor.swift; sourceTree = "<group>"; };
 		73FE8E1126B46AC500B174C2 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		73FE8E1326B46BBC00B174C2 /* UITableViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Ext.swift"; sourceTree = "<group>"; };
-		73FE8E1926B4766E00B174C2 /* mainFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainFeedViewModel.swift; sourceTree = "<group>"; };
+		73FE8E1926B4766E00B174C2 /* MainFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedViewModel.swift; sourceTree = "<group>"; };
 		73FE8E1B26B47C1800B174C2 /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		73FE8E1D26B47E7800B174C2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		73FE8E2126B47ECA00B174C2 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -164,7 +166,6 @@
 				8CF89B86220797DA89E6EF9C /* Pods-DJReaderTests.debug.xcconfig */,
 				BFE47BCEDD7102A4957584A9 /* Pods-DJReaderTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -292,10 +293,26 @@
 		737642CF26B415F7002E090C /* Parses */ = {
 			isa = PBXGroup;
 			children = (
-				737642D026B41607002E090C /* ZhihuXMLParser.swift */,
 				737642D426B42675002E090C /* DJDecoder.swift */,
 			);
 			path = Parses;
+			sourceTree = "<group>";
+		};
+		73D0036D26BA7AA900F841E7 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				737642D026B41607002E090C /* ZhihuXMLParser.swift */,
+				73D0036F26BA7AE200F841E7 /* CnBetaXMLParser.swift */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		73D0036E26BA7AB900F841E7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				73D0036D26BA7AA900F841E7 /* Parse */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		73FE8E0326B45B0E00B174C2 /* View */ = {
@@ -338,7 +355,7 @@
 		73FE8E1826B4765B00B174C2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				73FE8E1926B4766E00B174C2 /* mainFeedViewModel.swift */,
+				73FE8E1926B4766E00B174C2 /* MainFeedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -354,6 +371,7 @@
 		73FE8E2526B4810900B174C2 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				73D0036E26BA7AB900F841E7 /* Utils */,
 				73FE8E3526B5156F00B174C2 /* Database */,
 				73FE8E2626B4813300B174C2 /* Extension */,
 				73073FFD26B3F43100F9AFE9 /* ViewController */,
@@ -502,7 +520,7 @@
 			);
 			mainGroup = 73073FBD26B3F3BD00F9AFE9;
 			packageReferences = (
-				73FE8E1526B46F9A00B174C2 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				73FE8E1526B46F9A00B174C2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 73073FC726B3F3BD00F9AFE9 /* Products */;
 			projectDirPath = "";
@@ -660,10 +678,11 @@
 				73073FCE26B3F3BD00F9AFE9 /* MainFeedViewController.swift in Sources */,
 				73FE8E8926B57A5D00B174C2 /* FeedItem.swift in Sources */,
 				73FE8E3226B4880300B174C2 /* Date+Ext.swift in Sources */,
-				73FE8E1A26B4766E00B174C2 /* mainFeedViewModel.swift in Sources */,
+				73FE8E1A26B4766E00B174C2 /* MainFeedViewModel.swift in Sources */,
 				73FE8E2C26B4839000B174C2 /* BaseViewController.swift in Sources */,
 				73FE8E0A26B45B8D00B174C2 /* FeedCell.swift in Sources */,
 				73FE8E8F26B68D9400B174C2 /* ArticleWebViewController.swift in Sources */,
+				73D0037026BA7AE200F841E7 /* CnBetaXMLParser.swift in Sources */,
 				73FE8E0F26B467C700B174C2 /* DJColor.swift in Sources */,
 				73FE8E3426B4882B00B174C2 /* DateHelper.swift in Sources */,
 				737642D526B42675002E090C /* DJDecoder.swift in Sources */,
@@ -1022,7 +1041,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		73FE8E1526B46F9A00B174C2 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		73FE8E1526B46F9A00B174C2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -1035,7 +1054,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		73FE8E1626B46F9A00B174C2 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 73FE8E1526B46F9A00B174C2 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 73FE8E1526B46F9A00B174C2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
