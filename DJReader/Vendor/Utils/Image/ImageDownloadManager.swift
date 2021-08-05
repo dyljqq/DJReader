@@ -30,7 +30,7 @@ class ImageDownloadManager {
             
             DispatchQueue.main.async {
                 strongSelf.pendingOperations.downloadsInProgress.removeValue(forKey: record.urlString)
-                completionHandler(downloader.imageRecord)
+                completionHandler(record)
             }
         }
         

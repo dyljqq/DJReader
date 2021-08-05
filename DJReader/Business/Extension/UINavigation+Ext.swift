@@ -19,4 +19,9 @@ extension UINavigationController {
         self.pushViewController(vc, animated: true)
     }
     
+    func pushZhihuReportViewController() {
+        let vc = ZhihuReportViewController()
+        self.pushViewController(vc, animated: true)
+    }
+    
 }

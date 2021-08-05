@@ -37,6 +37,24 @@ class APIClient {
         }
     }
     
+    func get<T: Decodable>(router: Router, completionHandler: @escaping (T?) -> ()) {
+        guard let request = router.asURLRequest() else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                print("get error: \(error!)")
+                return
+            }
+            
+            guard let data = data else { return }
+            let model = DJDecoder<T>(data: data).decode()
+            completionHandler(model)
+        }
+        
+        task.resume()
+    }
+    
     func get(urlString: String, queryItems: [String: String]? = nil, handler: @escaping (Data) -> Void) {
         
         guard let url = URL(string: urlString) else {
