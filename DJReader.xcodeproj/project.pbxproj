@@ -25,6 +25,9 @@
 		73730E4526BC164E00DBE71A /* GeneralRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4426BC164E00DBE71A /* GeneralRouter.swift */; };
 		73730E4726BC198300DBE71A /* StoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4626BC198300DBE71A /* StoryList.swift */; };
 		73730E4A26BC1AA900DBE71A /* FeedConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4926BC1AA900DBE71A /* FeedConvertible.swift */; };
+		73730E4D26BC1F1400DBE71A /* ImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4C26BC1F1400DBE71A /* ImageOperation.swift */; };
+		73730E4F26BC268800DBE71A /* ImageDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4E26BC268800DBE71A /* ImageDownloadManager.swift */; };
+		73730E5126BC287000DBE71A /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E5026BC287000DBE71A /* UIImageView+Ext.swift */; };
 		737642CE26B413B1002E090C /* DJParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642CD26B413B1002E090C /* DJParse.swift */; };
 		737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D026B41607002E090C /* ZhihuXMLParser.swift */; };
 		737642D326B416F6002E090C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D226B416F6002E090C /* Feed.swift */; };
@@ -102,6 +105,9 @@
 		73730E4426BC164E00DBE71A /* GeneralRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRouter.swift; sourceTree = "<group>"; };
 		73730E4626BC198300DBE71A /* StoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryList.swift; sourceTree = "<group>"; };
 		73730E4926BC1AA900DBE71A /* FeedConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedConvertible.swift; sourceTree = "<group>"; };
+		73730E4C26BC1F1400DBE71A /* ImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperation.swift; sourceTree = "<group>"; };
+		73730E4E26BC268800DBE71A /* ImageDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadManager.swift; sourceTree = "<group>"; };
+		73730E5026BC287000DBE71A /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		737642CD26B413B1002E090C /* DJParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJParse.swift; sourceTree = "<group>"; };
 		737642D026B41607002E090C /* ZhihuXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuXMLParser.swift; sourceTree = "<group>"; };
 		737642D226B416F6002E090C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -242,9 +248,9 @@
 		73073FF926B3F3D400F9AFE9 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				73FE8E2326B47F8000B174C2 /* App.swift */,
 				73FE8E3C26B51DA100B174C2 /* Database */,
 				737642CF26B415F7002E090C /* Parses */,
-				73FE8E2326B47F8000B174C2 /* App.swift */,
 				73FE8E2026B47EB500B174C2 /* Common */,
 				73FE8E1026B46A8E00B174C2 /* Extension */,
 				73FE8E0D26B467B300B174C2 /* Consts */,
@@ -317,9 +323,20 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		73730E4B26BC1EED00DBE71A /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				73730E4C26BC1F1400DBE71A /* ImageOperation.swift */,
+				73730E4E26BC268800DBE71A /* ImageDownloadManager.swift */,
+				73730E5026BC287000DBE71A /* UIImageView+Ext.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		737642CA26B410FE002E090C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				73730E4B26BC1EED00DBE71A /* Image */,
 				73FE8E3326B4882B00B174C2 /* DateHelper.swift */,
 			);
 			path = Utils;
@@ -714,6 +731,7 @@
 				73730E4A26BC1AA900DBE71A /* FeedConvertible.swift in Sources */,
 				73730E4726BC198300DBE71A /* StoryList.swift in Sources */,
 				73FE8E3E26B51DB400B174C2 /* DBManage.swift in Sources */,
+				73730E4F26BC268800DBE71A /* ImageDownloadManager.swift in Sources */,
 				73730E4526BC164E00DBE71A /* GeneralRouter.swift in Sources */,
 				73073FCE26B3F3BD00F9AFE9 /* MainFeedViewController.swift in Sources */,
 				73FE8E8926B57A5D00B174C2 /* FeedItem.swift in Sources */,
@@ -723,10 +741,12 @@
 				73FE8E0A26B45B8D00B174C2 /* FeedCell.swift in Sources */,
 				73FE8E8F26B68D9400B174C2 /* ArticleWebViewController.swift in Sources */,
 				73D0037026BA7AE200F841E7 /* CnBetaXMLParser.swift in Sources */,
+				73730E5126BC287000DBE71A /* UIImageView+Ext.swift in Sources */,
 				73FE8E0F26B467C700B174C2 /* DJColor.swift in Sources */,
 				73FE8E3426B4882B00B174C2 /* DateHelper.swift in Sources */,
 				73730E3C26BC0D0E00DBE71A /* URLConvertible.swift in Sources */,
 				737642D526B42675002E090C /* DJDecoder.swift in Sources */,
+				73730E4D26BC1F1400DBE71A /* ImageOperation.swift in Sources */,
 				73FE8E1426B46BBC00B174C2 /* UITableViewCell+Ext.swift in Sources */,
 				737642D326B416F6002E090C /* Feed.swift in Sources */,
 				73FE8E2426B47F8000B174C2 /* App.swift in Sources */,

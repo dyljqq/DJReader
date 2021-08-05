@@ -49,7 +49,11 @@ class MainFeedViewController: BaseViewController {
             }
         }
         
-        
+        let urls = [
+            "http://www.freeimages.com/pic/m/c/ca/capetan/311935_shoji_screen.jpg",
+            "http://www.freeimages.com/pic/m/r/re/renato2004/243221_coliseu_de_roma.jpg",
+            "http://www.freeimages.com/pic/m/m/ma/malamantra/427679_mexican_1.jpg"
+        ]
     }
 
 }
