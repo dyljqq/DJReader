@@ -21,6 +21,12 @@ class APIClient {
     static let shared = APIClient()
     
     func get<T: Decodable>(source: FeedSource, handler: @escaping (T?) -> Void) {
+        // 兼容非xml数据
+        guard source.defaultFeed == nil else {
+            handler(source.defaultFeed as? T)
+            return
+        }
+        
         self.get(urlString: source.urlString) { data in
             source.parser?.parse(data: data) { dict in
                 let value = DJDecoder<T>(dict: dict).decode()
@@ -29,6 +35,24 @@ class APIClient {
                 }
              }
         }
+    }
+    
+    func get<T: Decodable>(router: Router, completionHandler: @escaping (T?) -> ()) {
+        guard let request = router.asURLRequest() else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if error != nil {
+                print("get error: \(error!)")
+                return
+            }
+            
+            guard let data = data else { return }
+            let model = DJDecoder<T>(data: data).decode()
+            completionHandler(model)
+        }
+        
+        task.resume()
     }
     
     func get(urlString: String, queryItems: [String: String]? = nil, handler: @escaping (Data) -> Void) {

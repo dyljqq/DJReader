@@ -48,8 +48,6 @@ class MainFeedViewController: BaseViewController {
                 strongSelf.tableView.reloadData()
             }
         }
-        
-        
     }
 
 }
@@ -77,8 +75,14 @@ extension MainFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let feed = dataSource[indexPath.row].feed {
-            self.navigationController?.pushFeedViewController(feed: feed)
+        let mainFeed =  dataSource[indexPath.row]
+        switch mainFeed.source {
+        case .zhihuReport:
+            self.navigationController?.pushZhihuReportViewController()
+        default:
+            if let feed = mainFeed.feed {
+                self.navigationController?.pushFeedViewController(feed: feed)
+            }
         }
     }
     
