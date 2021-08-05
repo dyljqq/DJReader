@@ -21,6 +21,12 @@ class APIClient {
     static let shared = APIClient()
     
     func get<T: Decodable>(source: FeedSource, handler: @escaping (T?) -> Void) {
+        // 兼容非xml数据
+        guard source.defaultFeed == nil else {
+            handler(source.defaultFeed as? T)
+            return
+        }
+        
         self.get(urlString: source.urlString) { data in
             source.parser?.parse(data: data) { dict in
                 let value = DJDecoder<T>(dict: dict).decode()

@@ -15,8 +15,7 @@ class MainFeedViewModel {
     
     let queue = DispatchQueue(label: mainFeedQueueName, attributes: [.concurrent])
     
-    init() {
-    }
+    init() {}
     
     func updateDataSource(isUseLocaldata: Bool, _ completionHandler: @escaping ([MainFeed]) -> ()) {
         if isUseLocaldata {
@@ -83,7 +82,7 @@ class MainFeedViewModel {
                 }
             }
             
-            self.dataSource = mainFeeds
+            self.dataSource = mainFeeds.sorted(by: { $0.source < $1.source })
             completionHandler(self.dataSource)
         }
         

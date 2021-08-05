@@ -18,6 +18,13 @@
 		73073FEC26B3F3C000F9AFE9 /* DJReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73073FEB26B3F3C000F9AFE9 /* DJReaderUITests.swift */; };
 		73073FFC26B3F40A00F9AFE9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73073FFB26B3F40A00F9AFE9 /* APIClient.swift */; };
 		7307400026B3F50900F9AFE9 /* FeedSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73073FFF26B3F50900F9AFE9 /* FeedSource.swift */; };
+		73730E3C26BC0D0E00DBE71A /* URLConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E3B26BC0D0E00DBE71A /* URLConvertible.swift */; };
+		73730E3F26BC0EAC00DBE71A /* ZhihuReportRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E3E26BC0EAC00DBE71A /* ZhihuReportRouter.swift */; };
+		73730E4126BC0F3900DBE71A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4026BC0F3900DBE71A /* Router.swift */; };
+		73730E4326BC112900DBE71A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4226BC112900DBE71A /* Error.swift */; };
+		73730E4526BC164E00DBE71A /* GeneralRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4426BC164E00DBE71A /* GeneralRouter.swift */; };
+		73730E4726BC198300DBE71A /* StoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4626BC198300DBE71A /* StoryList.swift */; };
+		73730E4A26BC1AA900DBE71A /* FeedConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E4926BC1AA900DBE71A /* FeedConvertible.swift */; };
 		737642CE26B413B1002E090C /* DJParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642CD26B413B1002E090C /* DJParse.swift */; };
 		737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D026B41607002E090C /* ZhihuXMLParser.swift */; };
 		737642D326B416F6002E090C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D226B416F6002E090C /* Feed.swift */; };
@@ -88,6 +95,13 @@
 		73073FED26B3F3C000F9AFE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73073FFB26B3F40A00F9AFE9 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		73073FFF26B3F50900F9AFE9 /* FeedSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSource.swift; sourceTree = "<group>"; };
+		73730E3B26BC0D0E00DBE71A /* URLConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConvertible.swift; sourceTree = "<group>"; };
+		73730E3E26BC0EAC00DBE71A /* ZhihuReportRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuReportRouter.swift; sourceTree = "<group>"; };
+		73730E4026BC0F3900DBE71A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		73730E4226BC112900DBE71A /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		73730E4426BC164E00DBE71A /* GeneralRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralRouter.swift; sourceTree = "<group>"; };
+		73730E4626BC198300DBE71A /* StoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryList.swift; sourceTree = "<group>"; };
+		73730E4926BC1AA900DBE71A /* FeedConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedConvertible.swift; sourceTree = "<group>"; };
 		737642CD26B413B1002E090C /* DJParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJParse.swift; sourceTree = "<group>"; };
 		737642D026B41607002E090C /* ZhihuXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuXMLParser.swift; sourceTree = "<group>"; };
 		737642D226B416F6002E090C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -269,6 +283,7 @@
 				737642D226B416F6002E090C /* Feed.swift */,
 				73FE8E8826B57A5D00B174C2 /* FeedItem.swift */,
 				73FE8E8A26B57A7D00B174C2 /* MainFeed.swift */,
+				73730E4626BC198300DBE71A /* StoryList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +293,26 @@
 			children = (
 				737642CD26B413B1002E090C /* DJParse.swift */,
 				73FE8E1D26B47E7800B174C2 /* Coordinator.swift */,
+				73730E3B26BC0D0E00DBE71A /* URLConvertible.swift */,
+				73730E4226BC112900DBE71A /* Error.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		73730E3D26BC0EA000DBE71A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				73730E3E26BC0EAC00DBE71A /* ZhihuReportRouter.swift */,
+				73730E4026BC0F3900DBE71A /* Router.swift */,
+				73730E4426BC164E00DBE71A /* GeneralRouter.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		73730E4826BC1A9000DBE71A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				73730E4926BC1AA900DBE71A /* FeedConvertible.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -371,6 +406,8 @@
 		73FE8E2526B4810900B174C2 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				73730E4826BC1A9000DBE71A /* Protocol */,
+				73730E3D26BC0EA000DBE71A /* Network */,
 				73D0036E26BA7AB900F841E7 /* Utils */,
 				73FE8E3526B5156F00B174C2 /* Database */,
 				73FE8E2626B4813300B174C2 /* Extension */,
@@ -674,7 +711,10 @@
 				73FE8E2226B47ECA00B174C2 /* MainCoordinator.swift in Sources */,
 				73FE8E1E26B47E7800B174C2 /* Coordinator.swift in Sources */,
 				73FE8E2A26B4818400B174C2 /* FeedViewController.swift in Sources */,
+				73730E4A26BC1AA900DBE71A /* FeedConvertible.swift in Sources */,
+				73730E4726BC198300DBE71A /* StoryList.swift in Sources */,
 				73FE8E3E26B51DB400B174C2 /* DBManage.swift in Sources */,
+				73730E4526BC164E00DBE71A /* GeneralRouter.swift in Sources */,
 				73073FCE26B3F3BD00F9AFE9 /* MainFeedViewController.swift in Sources */,
 				73FE8E8926B57A5D00B174C2 /* FeedItem.swift in Sources */,
 				73FE8E3226B4880300B174C2 /* Date+Ext.swift in Sources */,
@@ -685,6 +725,7 @@
 				73D0037026BA7AE200F841E7 /* CnBetaXMLParser.swift in Sources */,
 				73FE8E0F26B467C700B174C2 /* DJColor.swift in Sources */,
 				73FE8E3426B4882B00B174C2 /* DateHelper.swift in Sources */,
+				73730E3C26BC0D0E00DBE71A /* URLConvertible.swift in Sources */,
 				737642D526B42675002E090C /* DJDecoder.swift in Sources */,
 				73FE8E1426B46BBC00B174C2 /* UITableViewCell+Ext.swift in Sources */,
 				737642D326B416F6002E090C /* Feed.swift in Sources */,
@@ -692,12 +733,15 @@
 				7307400026B3F50900F9AFE9 /* FeedSource.swift in Sources */,
 				73FE8E1C26B47C1800B174C2 /* Enviroment.swift in Sources */,
 				73FE8E8B26B57A7D00B174C2 /* MainFeed.swift in Sources */,
+				73730E4126BC0F3900DBE71A /* Router.swift in Sources */,
 				73073FCA26B3F3BD00F9AFE9 /* AppDelegate.swift in Sources */,
 				73073FCC26B3F3BD00F9AFE9 /* SceneDelegate.swift in Sources */,
 				73FE8E2F26B4851400B174C2 /* FeedDetailCell.swift in Sources */,
+				73730E4326BC112900DBE71A /* Error.swift in Sources */,
 				73FE8E1226B46AC500B174C2 /* UIView+Ext.swift in Sources */,
 				737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */,
 				73073FFC26B3F40A00F9AFE9 /* APIClient.swift in Sources */,
+				73730E3F26BC0EAC00DBE71A /* ZhihuReportRouter.swift in Sources */,
 				73FE8E2826B4814800B174C2 /* UINavigation+Ext.swift in Sources */,
 				737642CE26B413B1002E090C /* DJParse.swift in Sources */,
 				73FE8E8726B573ED00B174C2 /* SQLTable.swift in Sources */,
