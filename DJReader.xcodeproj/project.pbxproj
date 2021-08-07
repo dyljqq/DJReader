@@ -31,6 +31,11 @@
 		73730E5426BC2A4F00DBE71A /* ZhihuReportViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E5326BC2A4F00DBE71A /* ZhihuReportViewControllerViewController.swift */; };
 		73730E5826BC2C0E00DBE71A /* ZhihuReportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E5626BC2C0E00DBE71A /* ZhihuReportCell.swift */; };
 		73730E5926BC2C0E00DBE71A /* ZhihuReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73730E5726BC2C0E00DBE71A /* ZhihuReportCell.xib */; };
+		73730E5B26BEB8DB00DBE71A /* ImageDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E5A26BEB8DB00DBE71A /* ImageDecoder.swift */; };
+		73730E5D26BEB8E900DBE71A /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E5C26BEB8E900DBE71A /* ImageCache.swift */; };
+		73730E5F26BED48E00DBE71A /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E5E26BED48E00DBE71A /* String+MD5.swift */; };
+		73730E6126BEDB3800DBE71A /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E6026BEDB3800DBE71A /* DiskCache.swift */; };
+		73730E6326BEDB5800DBE71A /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E6226BEDB5800DBE71A /* MemoryCache.swift */; };
 		737642CE26B413B1002E090C /* DJParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642CD26B413B1002E090C /* DJParse.swift */; };
 		737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D026B41607002E090C /* ZhihuXMLParser.swift */; };
 		737642D326B416F6002E090C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D226B416F6002E090C /* Feed.swift */; };
@@ -114,6 +119,11 @@
 		73730E5326BC2A4F00DBE71A /* ZhihuReportViewControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuReportViewControllerViewController.swift; sourceTree = "<group>"; };
 		73730E5626BC2C0E00DBE71A /* ZhihuReportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuReportCell.swift; sourceTree = "<group>"; };
 		73730E5726BC2C0E00DBE71A /* ZhihuReportCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ZhihuReportCell.xib; sourceTree = "<group>"; };
+		73730E5A26BEB8DB00DBE71A /* ImageDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDecoder.swift; sourceTree = "<group>"; };
+		73730E5C26BEB8E900DBE71A /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		73730E5E26BED48E00DBE71A /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
+		73730E6026BEDB3800DBE71A /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
+		73730E6226BEDB5800DBE71A /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		737642CD26B413B1002E090C /* DJParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJParse.swift; sourceTree = "<group>"; };
 		737642D026B41607002E090C /* ZhihuXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuXMLParser.swift; sourceTree = "<group>"; };
 		737642D226B416F6002E090C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -336,6 +346,11 @@
 				73730E4C26BC1F1400DBE71A /* ImageOperation.swift */,
 				73730E4E26BC268800DBE71A /* ImageDownloadManager.swift */,
 				73730E5026BC287000DBE71A /* UIImageView+Ext.swift */,
+				73730E5A26BEB8DB00DBE71A /* ImageDecoder.swift */,
+				73730E5C26BEB8E900DBE71A /* ImageCache.swift */,
+				73730E5E26BED48E00DBE71A /* String+MD5.swift */,
+				73730E6026BEDB3800DBE71A /* DiskCache.swift */,
+				73730E6226BEDB5800DBE71A /* MemoryCache.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -755,6 +770,7 @@
 				73FE8E1E26B47E7800B174C2 /* Coordinator.swift in Sources */,
 				73FE8E2A26B4818400B174C2 /* FeedViewController.swift in Sources */,
 				73730E4A26BC1AA900DBE71A /* FeedConvertible.swift in Sources */,
+				73730E5B26BEB8DB00DBE71A /* ImageDecoder.swift in Sources */,
 				73730E4726BC198300DBE71A /* StoryList.swift in Sources */,
 				73FE8E3E26B51DB400B174C2 /* DBManage.swift in Sources */,
 				73730E4F26BC268800DBE71A /* ImageDownloadManager.swift in Sources */,
@@ -762,16 +778,19 @@
 				73073FCE26B3F3BD00F9AFE9 /* MainFeedViewController.swift in Sources */,
 				73FE8E8926B57A5D00B174C2 /* FeedItem.swift in Sources */,
 				73FE8E3226B4880300B174C2 /* Date+Ext.swift in Sources */,
+				73730E5F26BED48E00DBE71A /* String+MD5.swift in Sources */,
 				73FE8E1A26B4766E00B174C2 /* MainFeedViewModel.swift in Sources */,
 				73FE8E2C26B4839000B174C2 /* BaseViewController.swift in Sources */,
 				73FE8E0A26B45B8D00B174C2 /* FeedCell.swift in Sources */,
 				73730E5826BC2C0E00DBE71A /* ZhihuReportCell.swift in Sources */,
+				73730E6126BEDB3800DBE71A /* DiskCache.swift in Sources */,
 				73FE8E8F26B68D9400B174C2 /* ArticleWebViewController.swift in Sources */,
 				73D0037026BA7AE200F841E7 /* CnBetaXMLParser.swift in Sources */,
 				73730E5126BC287000DBE71A /* UIImageView+Ext.swift in Sources */,
 				73FE8E0F26B467C700B174C2 /* DJColor.swift in Sources */,
 				73FE8E3426B4882B00B174C2 /* DateHelper.swift in Sources */,
 				73730E3C26BC0D0E00DBE71A /* URLConvertible.swift in Sources */,
+				73730E5D26BEB8E900DBE71A /* ImageCache.swift in Sources */,
 				737642D526B42675002E090C /* DJDecoder.swift in Sources */,
 				73730E4D26BC1F1400DBE71A /* ImageOperation.swift in Sources */,
 				73FE8E1426B46BBC00B174C2 /* UITableViewCell+Ext.swift in Sources */,
@@ -792,6 +811,7 @@
 				73FE8E2826B4814800B174C2 /* UINavigation+Ext.swift in Sources */,
 				73730E5426BC2A4F00DBE71A /* ZhihuReportViewControllerViewController.swift in Sources */,
 				737642CE26B413B1002E090C /* DJParse.swift in Sources */,
+				73730E6326BEDB5800DBE71A /* MemoryCache.swift in Sources */,
 				73FE8E8726B573ED00B174C2 /* SQLTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

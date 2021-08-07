@@ -7,7 +7,6 @@
 
 import UIKit
 
-// TODO: 缓存 + 解码
 extension UIImageView {
     func setImage(with urlString: String) {
         guard let _ = URL(string: urlString) else {
@@ -19,11 +18,29 @@ extension UIImageView {
 
         let record = ImageRecord(urlString)
         ImageDownloadManager.shared.startDownload(imageRecord: record) { [weak self] record in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let newImage = record.image else {
                 return
             }
             
-            strongSelf.image = record.image
+            if let image = ImageCacheManager.default.value(for: urlString) {
+                strongSelf._setImage(image)
+                return
+            }
+
+            ImageCacheManager.default.store(for: urlString, with: newImage)
+            strongSelf._setImage(newImage)
+        }
+    }
+    
+    private func _setImage(_ image: UIImage?) {
+        guard let data = image?.pngData() else {
+            return
+        }
+        
+        ImageDecoder.decode(data: data, to: self.bounds.size, scale: 1) { image in
+            DispatchQueue.main.async {
+                self.image = image
+            }
         }
     }
     
