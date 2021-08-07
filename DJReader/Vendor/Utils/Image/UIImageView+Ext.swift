@@ -24,12 +24,24 @@ extension UIImageView {
             }
             
             if let image = ImageCacheManager.default.value(for: urlString) {
-                strongSelf.image = image
+                strongSelf._setImage(image)
                 return
             }
 
             ImageCacheManager.default.store(for: urlString, with: newImage)
-            strongSelf.image = newImage
+            strongSelf._setImage(newImage)
+        }
+    }
+    
+    private func _setImage(_ image: UIImage?) {
+        guard let data = image?.pngData() else {
+            return
+        }
+        
+        ImageDecoder.decode(data: data, to: self.bounds.size, scale: 1) { image in
+            DispatchQueue.main.async {
+                self.image = image
+            }
         }
     }
     
