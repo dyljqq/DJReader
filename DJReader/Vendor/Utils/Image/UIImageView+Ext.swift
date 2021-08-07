@@ -19,11 +19,17 @@ extension UIImageView {
 
         let record = ImageRecord(urlString)
         ImageDownloadManager.shared.startDownload(imageRecord: record) { [weak self] record in
-            guard let strongSelf = self else {
+            guard let strongSelf = self, let newImage = record.image else {
                 return
             }
             
-            strongSelf.image = record.image
+            if let image = ImageCacheManager.default.value(for: urlString) {
+                strongSelf.image = image
+                return
+            }
+
+            ImageCacheManager.default.store(for: urlString, with: newImage)
+            strongSelf.image = newImage
         }
     }
     
