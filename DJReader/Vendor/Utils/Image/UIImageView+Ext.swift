@@ -7,7 +7,6 @@
 
 import UIKit
 
-// TODO: 缓存 + 解码
 extension UIImageView {
     func setImage(with urlString: String) {
         guard let _ = URL(string: urlString) else {
