@@ -7,7 +7,7 @@
 
 import Foundation
 
-let feedSources: [FeedSource] = [.zhihu, .cnBeta, .zhihuReport]
+let feedSources: [FeedSource] = [.zhihu, .cnBeta, .zhihuReport, .myzb]
 
 func <(left: FeedSource, right: FeedSource) -> Bool {
     return left.rawValue < right.rawValue
@@ -23,6 +23,7 @@ enum FeedSource: Int, Decodable {
     case zhihu
     case cnBeta
     case zhihuReport
+    case myzb // 摸鱼周报
     
     var parser: DJParse? {
         guard case ParseWay.xml = parseWay else {
@@ -32,6 +33,7 @@ enum FeedSource: Int, Decodable {
         switch self {
         case .zhihu: return ZhihuXMLParser()
         case .cnBeta: return CnBetaXMLParser()
+        case .myzb: return MyzbXMLParser()
         default: return nil
         }
     }
@@ -59,6 +61,7 @@ extension FeedSource {
         case .zhihuReport: return ZhihuReportRouter.lastNews
         case .zhihu: return GeneralRouter.zhihu
         case .cnBeta: return GeneralRouter.cnBeta
+        case .myzb: return GeneralRouter.myzb
         case .unknow: return nil
         }
     }

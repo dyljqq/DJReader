@@ -45,6 +45,9 @@ struct DateHelper {
                     return date
                 }
             }
+        } else {
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            return formatter.date(from: dateString)
         }
         
         return nil

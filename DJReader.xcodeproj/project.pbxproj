@@ -36,6 +36,7 @@
 		73730E5F26BED48E00DBE71A /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E5E26BED48E00DBE71A /* String+MD5.swift */; };
 		73730E6126BEDB3800DBE71A /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E6026BEDB3800DBE71A /* DiskCache.swift */; };
 		73730E6326BEDB5800DBE71A /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E6226BEDB5800DBE71A /* MemoryCache.swift */; };
+		73730E6526C19A6300DBE71A /* MyzbXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73730E6426C19A6300DBE71A /* MyzbXMLParser.swift */; };
 		737642CE26B413B1002E090C /* DJParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642CD26B413B1002E090C /* DJParse.swift */; };
 		737642D126B41607002E090C /* ZhihuXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D026B41607002E090C /* ZhihuXMLParser.swift */; };
 		737642D326B416F6002E090C /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737642D226B416F6002E090C /* Feed.swift */; };
@@ -124,6 +125,7 @@
 		73730E5E26BED48E00DBE71A /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		73730E6026BEDB3800DBE71A /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		73730E6226BEDB5800DBE71A /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
+		73730E6426C19A6300DBE71A /* MyzbXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyzbXMLParser.swift; sourceTree = "<group>"; };
 		737642CD26B413B1002E090C /* DJParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJParse.swift; sourceTree = "<group>"; };
 		737642D026B41607002E090C /* ZhihuXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhihuXMLParser.swift; sourceTree = "<group>"; };
 		737642D226B416F6002E090C /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			children = (
 				737642D026B41607002E090C /* ZhihuXMLParser.swift */,
 				73D0036F26BA7AE200F841E7 /* CnBetaXMLParser.swift */,
+				73730E6426C19A6300DBE71A /* MyzbXMLParser.swift */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 				73FE8E3226B4880300B174C2 /* Date+Ext.swift in Sources */,
 				73730E5F26BED48E00DBE71A /* String+MD5.swift in Sources */,
 				73FE8E1A26B4766E00B174C2 /* MainFeedViewModel.swift in Sources */,
+				73730E6526C19A6300DBE71A /* MyzbXMLParser.swift in Sources */,
 				73FE8E2C26B4839000B174C2 /* BaseViewController.swift in Sources */,
 				73FE8E0A26B45B8D00B174C2 /* FeedCell.swift in Sources */,
 				73730E5826BC2C0E00DBE71A /* ZhihuReportCell.swift in Sources */,
