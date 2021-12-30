@@ -20,6 +20,34 @@ class APIClient {
     
     static let shared = APIClient()
     
+    func get(source: FeedSource) async -> Result<[String: Any], DJError> {
+        let r = await get(urlString: source.urlString)
+        switch r {
+        case .success(let data):
+            if let dict = await source.parser?.parse(data: data) {
+                return .success(dict)
+            } else {
+                return .failure(.parseError)
+            }
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+    
+    func get<T: Decodable>(router: Router) async -> T? {
+        guard let request = router.asURLRequest() else {
+            return nil
+        }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            return DJDecoder<T>(data: data).decode()
+        } catch {
+            print("APIClient get data error: \(error)")
+            return nil
+        }
+    }
+    
     func get<T: Decodable>(source: FeedSource, handler: @escaping (T?) -> Void) {
         // 兼容非xml数据
         guard source.defaultFeed == nil else {
@@ -85,6 +113,31 @@ class APIClient {
             handler(data)
         }
         task.resume()
+    }
+    
+    func get(urlString: String, queryItems: [String: String]? = nil) async -> Result<Data, DJError> {
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL(urlString))
+        }
+        
+        var validUrl: URL? = url
+        if queryItems != nil && !queryItems!.isEmpty {
+            var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            components?.queryItems = queryItems?.compactMap { URLQueryItem(name: $1, value: $0) }
+            validUrl = components?.url
+        }
+        
+        guard let validUrl = validUrl else {
+            return .failure(.invalidURL(urlString))
+        }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: validUrl)
+            return .success(data)
+        } catch {
+            print("APIClient get urlstring error: \(error)")
+            return .failure(.networkError(error))
+        }
     }
     
 }

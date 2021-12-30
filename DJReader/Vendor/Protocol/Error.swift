@@ -9,4 +9,6 @@ import Foundation
 
 enum DJError: Error {
     case invalidURL(String)
+    case networkError(Error)
+    case parseError
 }

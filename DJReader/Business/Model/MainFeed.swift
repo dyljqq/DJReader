@@ -57,6 +57,16 @@ extension MainFeed: SQLTable {
         }
         return Int(feedId)
     }
+    
+    static func getMainFeed(by source: FeedSource) -> MainFeed? {
+        let mainFeedId = MainFeed.getFeedId(by: source)
+        
+        if var feed = Feed.getFeed(by: mainFeedId){
+            feed.items = FeedItem.getItems(by: feed.id)
+            return MainFeed(feed: feed, source: source)
+        }
+        return nil
+    }
 }
 
 let defaultMainFeed = MainFeed(feed: defaultFeed, source: .zhihu)
