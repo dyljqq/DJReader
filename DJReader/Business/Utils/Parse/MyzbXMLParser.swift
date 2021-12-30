@@ -24,6 +24,7 @@ class MyzbXMLParser: NSObject, DJParse {
     ]
     
     var completionHandler: (([String: Any]) -> Void)?
+    var continuation: CheckedContinuation<[String: Any]?, Error>?
     
     func parse(data: Data, completionHandler: @escaping ([String : Any]) -> Void) {
         self.completionHandler = completionHandler
@@ -31,6 +32,20 @@ class MyzbXMLParser: NSObject, DJParse {
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()
+    }
+    
+    func parse(data: Data) async -> [String : Any]? {
+        do {
+            return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[String: Any]?, Error>) in
+                self.continuation = continuation
+                let parser = XMLParser(data: data)
+                parser.delegate = self
+                parser.parse()
+            }
+        } catch {
+            print("MyzbXMLParser parse error: \(error)")
+            return nil
+        }
     }
     
 }
@@ -74,7 +89,7 @@ extension MyzbXMLParser: XMLParserDelegate {
         head["title"] = "iOS摸鱼周报"
         head["description"] = "iOS摸鱼周报，主要分享大家开发过程遇到的经验教训及一些有用的学习内容。"
         head["items"] = items
-        self.completionHandler?(head)
+        self.continuation?.resume(returning: head)
     }
     
 }

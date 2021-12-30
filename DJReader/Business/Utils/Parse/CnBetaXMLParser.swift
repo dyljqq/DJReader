@@ -18,12 +18,27 @@ class CnBetaXMLParser: NSObject, DJParse {
     var curItem: [String: String] = [:]
     
     var completionHandler: (([String: Any]) -> Void)?
+    var continuation: CheckedContinuation<[String: Any]?, Error>?
     
     func parse(data: Data, completionHandler: @escaping ([String: Any]) -> Void) {
         self.completionHandler = completionHandler
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()
+    }
+    
+    func parse(data: Data) async -> [String : Any]? {
+        do {
+            return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[String: Any]?, Error>) in
+                self.continuation = continuation
+                let parser = XMLParser(data: data)
+                parser.delegate = self
+                parser.parse()
+            }
+        } catch {
+            print("CnBetaXMLParser parse error: \(error)")
+            return nil
+        }
     }
 }
 
@@ -64,8 +79,7 @@ extension CnBetaXMLParser: XMLParserDelegate {
     
     func parserDidEndDocument(_ parser: XMLParser) {
         head["items"] = items
-        completionHandler?(head)
+        self.continuation?.resume(returning: head)
     }
-    
     
 }

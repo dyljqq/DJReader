@@ -21,6 +21,7 @@ class ZhihuXMLParser: NSObject, DJParse {
     var itemParseKeys = ["title", "link", "description", "pubDate"]
     
     var completionHandler: (([String: Any]) -> Void)?
+    var continuation: CheckedContinuation<[String: Any]?, Error>?
     
     func parse(data: Data, completionHandler: @escaping ([String: Any]) -> Void) {
         self.completionHandler = completionHandler
@@ -28,6 +29,20 @@ class ZhihuXMLParser: NSObject, DJParse {
         let parser = XMLParser(data: data)
         parser.delegate = self
         parser.parse()
+    }
+    
+    func parse(data: Data) async -> [String : Any]? {
+        do {
+            return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[String: Any]?, Error>) in
+                self.continuation = continuation
+                let parser = XMLParser(data: data)
+                parser.delegate = self
+                parser.parse()
+            }
+        } catch {
+            print("ZhihuXMLParser parse error: \(error)")
+            return nil
+        }
     }
     
 }
@@ -64,8 +79,7 @@ extension ZhihuXMLParser: XMLParserDelegate {
     
     func parserDidEndDocument(_ parser: XMLParser) {
         dict["items"] = self.items
-        
-        self.completionHandler?(dict)
+        self.continuation?.resume(returning: dict)
     }
     
 }

@@ -41,12 +41,11 @@ class MainFeedViewController: BaseViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        mainFeedViewModel.updateDataSource(isUseLocaldata: true) { [weak self] feeds in
-            guard let strongSelf = self else { return }
-            DispatchQueue.main.async {
-                strongSelf.tableView.reloadData()
-            }
+        Task {
+            await mainFeedViewModel.updateDataSource(isUseLocalData: true)
+            self.tableView.reloadData()
+            await mainFeedViewModel.updateDataSource(isUseLocalData: false)
+            self.tableView.reloadData()
         }
     }
 
