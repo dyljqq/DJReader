@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FeedCell: UITableViewCell {
     
-    @IBOutlet weak var feedImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
-    
-    override func awakeFromNib() {
+  @IBOutlet weak var feedImageView: UIImageView!
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var descLabel: UILabel!
+  @IBOutlet weak var numLabel: UILabel!
+
+  override func awakeFromNib() {
         super.awakeFromNib()
     }
     
@@ -22,9 +24,10 @@ class FeedCell: UITableViewCell {
             return
         }
         
-        self.feedImageView.image = UIImage(named: mainFeed.source.imageName)
+        feedImageView.kf.setImage(with: URL(string: mainFeed.source.imageName), placeholder: UIImage(named: mainFeed.source.imageName))
         self.titleLabel.text = feed.title
         self.descLabel.text = feed.description
+      self.numLabel.text = "\(mainFeed.feed?.items.count ?? 0)"
     }
     
 }
