@@ -53,9 +53,8 @@ class MyzbXMLParser: NSObject, DJParse {
 extension MyzbXMLParser: XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-
         curElement = elementName
-        if elementName == "entry" {
+        if elementName == "item" {
             curEntry = [:]
             isParseHead = false
         }
@@ -64,13 +63,13 @@ extension MyzbXMLParser: XMLParserDelegate {
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         let data = string.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .newlines)
         let mappingName = elementNameMapping[curElement] ?? curElement
-        curEntry[mappingName] = (curEntry[mappingName] ?? "") + data
+        curEntry[mappingName, default: ""] += data
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if isParseHead {
             head = curEntry
-        } else if elementName == "entry" {
+        } else if elementName == "item" {
             if let dateString = curEntry["pubDate"] {
                 var ds = ""
                 let arr = dateString.split(separator: "T")
@@ -81,13 +80,13 @@ extension MyzbXMLParser: XMLParserDelegate {
                 }
                 curEntry["pubDate"] = ds
             }
+            curEntry["description"] = curEntry["content:encoded"]
             items.append(curEntry)
         }
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
         head["title"] = "iOS摸鱼周报"
-        head["description"] = "iOS摸鱼周报，主要分享大家开发过程遇到的经验教训及一些有用的学习内容。"
         head["items"] = items
         self.continuation?.resume(returning: head)
     }
