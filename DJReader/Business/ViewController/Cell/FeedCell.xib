@@ -24,8 +24,8 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6R-UR-W8b">
-                        <rect key="frame" x="84" y="14" width="220" height="21.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <rect key="frame" x="84" y="14" width="220" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.2627450980392157" green="0.14117647058823529" blue="0.047058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -35,13 +35,21 @@
                         <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSU-rO-gx1" userLabel="Num Label">
+                        <rect key="frame" x="277.5" y="18" width="26.5" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="K6R-UR-W8b" secondAttribute="trailing" constant="16" id="3p3-Qz-rhZ"/>
                     <constraint firstItem="kyd-3W-eM4" firstAttribute="bottom" secondItem="w40-e6-Sfh" secondAttribute="bottom" id="Pdd-h0-Qu6"/>
+                    <constraint firstItem="iSU-rO-gx1" firstAttribute="centerY" secondItem="K6R-UR-W8b" secondAttribute="centerY" id="PuY-cR-GtX"/>
                     <constraint firstItem="w40-e6-Sfh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="TpB-GZ-adY"/>
                     <constraint firstItem="K6R-UR-W8b" firstAttribute="top" secondItem="w40-e6-Sfh" secondAttribute="top" id="Vab-M5-XOp"/>
                     <constraint firstItem="kyd-3W-eM4" firstAttribute="trailing" secondItem="K6R-UR-W8b" secondAttribute="trailing" id="WMo-wm-nlC"/>
+                    <constraint firstItem="iSU-rO-gx1" firstAttribute="trailing" secondItem="K6R-UR-W8b" secondAttribute="trailing" id="Zpk-kA-ILG"/>
                     <constraint firstItem="w40-e6-Sfh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZsQ-8P-GHL"/>
                     <constraint firstItem="K6R-UR-W8b" firstAttribute="leading" secondItem="w40-e6-Sfh" secondAttribute="trailing" constant="8" symbolic="YES" id="aIU-Ua-qgI"/>
                     <constraint firstItem="kyd-3W-eM4" firstAttribute="leading" secondItem="K6R-UR-W8b" secondAttribute="leading" id="saI-GX-OKk"/>
@@ -51,9 +59,10 @@
             <connections>
                 <outlet property="descLabel" destination="kyd-3W-eM4" id="uQQ-ra-aqh"/>
                 <outlet property="feedImageView" destination="w40-e6-Sfh" id="6s1-l2-5oN"/>
+                <outlet property="numLabel" destination="iSU-rO-gx1" id="lbD-Ff-XkJ"/>
                 <outlet property="titleLabel" destination="K6R-UR-W8b" id="eIF-Nf-Aea"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="69.642857142857139"/>
+            <point key="canvasLocation" x="66.666666666666671" y="39.508928571428569"/>
         </tableViewCell>
     </objects>
 </document>
