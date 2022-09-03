@@ -67,7 +67,13 @@ extension FeedSource {
     }
     
     var imageName: String {
-        return "zhihu"
+      switch self {
+      case .zhihu: return "https://github.com/ming1016/GCDFetchFeed/blob/master/GCDFetchFeed/resource/logo_zhihu.png?raw=true"
+      case .cnBeta: return "https://github.com/ming1016/GCDFetchFeed/blob/master/GCDFetchFeed/resource/logo_cnbeta.jpeg?raw=true"
+      case .myzb: return "https://zhangferry.com/images/avatar.png"
+      case .zhihuReport: return "https://pic1.zhimg.com/80/5c64cbfbb7969a585e03adf8725392f4_1440w.jpg?source=1940ef5c"
+      case .unknow: return ""
+      }
     }
     
     var defaultFeed: Feed? {

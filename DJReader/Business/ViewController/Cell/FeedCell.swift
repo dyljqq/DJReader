@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FeedCell: UITableViewCell {
     
@@ -22,7 +23,7 @@ class FeedCell: UITableViewCell {
             return
         }
         
-        self.feedImageView.image = UIImage(named: mainFeed.source.imageName)
+        feedImageView.kf.setImage(with: URL(string: mainFeed.source.imageName), placeholder: UIImage(named: mainFeed.source.imageName))
         self.titleLabel.text = feed.title
         self.descLabel.text = feed.description
     }

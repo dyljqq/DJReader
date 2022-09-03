@@ -32,7 +32,7 @@ class MainFeedViewController: BaseViewController {
     }
     
     func setup() {
-        self.title = "阅读器"
+        self.title = "RSS Reader"
         
         FeedCell.registerNib(tableView)
         
